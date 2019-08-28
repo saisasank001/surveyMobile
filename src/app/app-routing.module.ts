@@ -14,7 +14,11 @@ const routes: Routes = [
   {
     path: 'list',
     loadChildren: () => import('./list/list.module').then(m => m.ListPageModule)
-  }
+  },
+  { path: 'get-tenant-code', loadChildren: './get-tenant-code/get-tenant-code.module#GetTenantCodePageModule' },
+  { path: 'get-passcode', loadChildren: './get-passcode/get-passcode.module#GetPasscodePageModule' },
+  { path: 'survey-categories', loadChildren: './survey-categories/survey-categories.module#SurveyCategoriesPageModule' },
+  { path: 'survey-submit', loadChildren: './survey-submit/survey-submit.module#SurveySubmitPageModule' }
 ];
 
 @NgModule({

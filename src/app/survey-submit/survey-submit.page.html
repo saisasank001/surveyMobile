@@ -1,0 +1,180 @@
+<div class="page">
+    <div class="header">
+        <ion-grid>
+            <ion-row>
+                <ion-col class="one-col" routerLink="/survey-categories"> <fa-icon icon="angle-left"></fa-icon>Back</ion-col>
+                <ion-col class="two-col"><img class="header-logo" src="https://www.expectmorearizona.org/wp-content/uploads/2016/11/facebook-png-icon-follow-us-facebook-1.png"></ion-col>
+                <ion-col class="text-button three-col" (click)="nextQuestion()">skip</ion-col>
+            </ion-row>
+        </ion-grid>
+    </div>
+    <div class="question">
+        <p class="qtn">{{question[index]['Title']}}</p>
+        <div *ngIf="question[index]['ResponseType']=='starRating'">
+            <div class="circle">
+                <span *ngIf="!question[index]['DynamicForm']['answer']">0</span>
+                <span *ngIf="question[index]['DynamicForm']['answer']">{{question[index]['DynamicForm']['answer']}}</span>
+                /
+                {{question[index]['DynamicForm']['to']}}
+
+            </div>
+                    <ion-grid>
+                        <ion-col (click)="rating(1)">
+                            <ion-icon name="star-outline" class="star" *ngIf="!question[index]['DynamicForm']['answer']"></ion-icon>
+                            <ion-icon name="star" class="star" *ngIf="question[index]['DynamicForm']['answer'] && question[index]['DynamicForm']['answer']>0" ></ion-icon>
+                        </ion-col>
+                        <ion-col *ngIf="question[index]['DynamicForm']['to']>1" (click)="rating(2)">
+                            <ion-icon name="star-outline" class="star" *ngIf="!question[index]['DynamicForm']['answer'] || (question[index]['DynamicForm']['answer'] && question[index]['DynamicForm']['answer']<2)" ></ion-icon>
+                            <ion-icon name="star" class="star" *ngIf="question[index]['DynamicForm']['answer'] && question[index]['DynamicForm']['answer']>1"></ion-icon>
+                        </ion-col>
+                        <ion-col *ngIf="question[index]['DynamicForm']['to']>2" (click)="rating(3)">
+                            <ion-icon name="star-outline" class="star" *ngIf="!question[index]['DynamicForm']['answer'] || (question[index]['DynamicForm']['answer'] && question[index]['DynamicForm']['answer']<3)" ></ion-icon>
+                            <ion-icon name="star" class="star" *ngIf="question[index]['DynamicForm']['answer'] && question[index]['DynamicForm']['answer']>2"></ion-icon>
+                        </ion-col>
+                        <ion-col *ngIf="question[index]['DynamicForm']['to']>3" (click)="rating(4)">
+                            <ion-icon name="star-outline" class="star" *ngIf="!question[index]['DynamicForm']['answer'] || (question[index]['DynamicForm']['answer'] && question[index]['DynamicForm']['answer']<4)" ></ion-icon>
+                            <ion-icon name="star" class="star" *ngIf="question[index]['DynamicForm']['answer'] && question[index]['DynamicForm']['answer']>3"></ion-icon>
+                        </ion-col>
+                        <ion-col *ngIf="question[index]['DynamicForm']['to']>4" (click)="rating(5)">
+                            <ion-icon name="star-outline" class="star" *ngIf="!question[index]['DynamicForm']['answer'] || (question[index]['DynamicForm']['answer'] && question[index]['DynamicForm']['answer']<5)" ></ion-icon>
+                            <ion-icon name="star" class="star" *ngIf="question[index]['DynamicForm']['answer'] && question[index]['DynamicForm']['answer']>4"></ion-icon>
+                        </ion-col>
+
+                    </ion-grid>
+        </div>
+        <div *ngIf="question[index]['ResponseType']=='linearScale'">
+            <div class="circle">
+                <span *ngIf="!question[index]['DynamicForm']['answer']">0</span>
+                <span *ngIf="question[index]['DynamicForm']['answer']">{{question[index]['DynamicForm']['answer']}}</span>
+                /
+                {{question[index]['DynamicForm']['to']}}
+            </div>
+
+            <div style="margin-left:15%;margin-right:15%;margin-top:25px">
+                <ng5-slider [(value)]="question[index]['DynamicForm']['answer']"  [options]="getFormattedData(question[index]['DynamicForm']['to'],question[index]['DynamicForm']['set'])"></ng5-slider>
+            </div>
+        </div>
+
+        <div *ngIf="question[index]['ResponseType']=='smiley'" >
+            <div class="answer-smiley" >
+                <img src="/assets/smileys/1x/1.png"  *ngIf="question[index]['DynamicForm']['answer'] && question[index]['DynamicForm']['answer']==1 && question[index]['DynamicForm'].set==1">
+                <img src="/assets/smileys/2x/1.png"  *ngIf="question[index]['DynamicForm']['answer'] && question[index]['DynamicForm']['answer']==1 && question[index]['DynamicForm'].set==2">
+                <img src="/assets/smileys/3x/1.png"  *ngIf="question[index]['DynamicForm']['answer'] && question[index]['DynamicForm']['answer']==1 && question[index]['DynamicForm'].set==3">
+                <img src="/assets/smileys/1x/2.png"  *ngIf="question[index]['DynamicForm']['answer'] && question[index]['DynamicForm']['answer']==2 && question[index]['DynamicForm'].set==1">
+                <img src="/assets/smileys/2x/2.png"  *ngIf="question[index]['DynamicForm']['answer'] && question[index]['DynamicForm']['answer']==2 && question[index]['DynamicForm'].set==2">
+                <img src="/assets/smileys/3x/2.png"  *ngIf="question[index]['DynamicForm']['answer'] && question[index]['DynamicForm']['answer']==2 && question[index]['DynamicForm'].set==3">
+                <img src="/assets/smileys/1x/3.png"  *ngIf="question[index]['DynamicForm']['answer'] && question[index]['DynamicForm']['answer']==3 && question[index]['DynamicForm'].set==1">
+                <img src="/assets/smileys/2x/3.png"  *ngIf="question[index]['DynamicForm']['answer'] && question[index]['DynamicForm']['answer']==3 && question[index]['DynamicForm'].set==2">
+                <img src="/assets/smileys/3x/3.png"  *ngIf="question[index]['DynamicForm']['answer'] && question[index]['DynamicForm']['answer']==3 && question[index]['DynamicForm'].set==3">
+                <img src="/assets/smileys/1x/4.png"  *ngIf="question[index]['DynamicForm']['answer'] && question[index]['DynamicForm']['answer']==4 && question[index]['DynamicForm'].set==1">
+                <img src="/assets/smileys/2x/4.png"  *ngIf="question[index]['DynamicForm']['answer'] && question[index]['DynamicForm']['answer']==4 && question[index]['DynamicForm'].set==2">
+                <img src="/assets/smileys/3x/4.png"  *ngIf="question[index]['DynamicForm']['answer'] && question[index]['DynamicForm']['answer']==4 && question[index]['DynamicForm'].set==3">
+                <img src="/assets/smileys/1x/5.png"  *ngIf="question[index]['DynamicForm']['answer'] && question[index]['DynamicForm']['answer']==5 && question[index]['DynamicForm'].set==1">
+                <img src="/assets/smileys/2x/5.png"  *ngIf="question[index]['DynamicForm']['answer'] && question[index]['DynamicForm']['answer']==5 && question[index]['DynamicForm'].set==2">
+                <img src="/assets/smileys/3x/5.png"  *ngIf="question[index]['DynamicForm']['answer'] && question[index]['DynamicForm']['answer']==5 && question[index]['DynamicForm'].set==3">
+            </div>
+
+            <ion-grid style="margin-left:15%;margin-right:15%">
+                <ion-row>
+                    <ion-col (click)="rating(1)">
+                        <img src="/assets/smileys/1x/1.png"  *ngIf="question[index]['DynamicForm'].set==1">
+                        <img src="/assets/smileys/2x/1.png"  *ngIf="question[index]['DynamicForm'].set==2">
+                        <img src="/assets/smileys/3x/1.png"  *ngIf="question[index]['DynamicForm'].set==3">
+                        <p>Worst</p></ion-col>
+                    <ion-col (click)="rating(2)">
+                        <img src="/assets/smileys/1x/2.png"  *ngIf="question[index]['DynamicForm'].set==1">
+                        <img src="/assets/smileys/2x/2.png"  *ngIf="question[index]['DynamicForm'].set==2">
+                        <img src="/assets/smileys/3x/2.png"  *ngIf="question[index]['DynamicForm'].set==3">
+                        <p>Bad</p></ion-col>
+                    <ion-col (click)="rating(3)">
+                        <img src="/assets/smileys/1x/3.png"  *ngIf="question[index]['DynamicForm'].set==1">
+                        <img src="/assets/smileys/2x/3.png"  *ngIf="question[index]['DynamicForm'].set==2">
+                        <img src="/assets/smileys/3x/3.png"  *ngIf="question[index]['DynamicForm'].set==3">
+                        <p>Average</p>
+                    </ion-col>
+                    <ion-col (click)="rating(4)">
+                        <img src="/assets/smileys/1x/4.png"  *ngIf="question[index]['DynamicForm'].set==1">
+                        <img src="/assets/smileys/2x/4.png"  *ngIf="question[index]['DynamicForm'].set==2">
+                        <img src="/assets/smileys/3x/4.png"  *ngIf="question[index]['DynamicForm'].set==3">
+                        <p>Good</p>
+
+                    </ion-col>
+                    <ion-col (click)="rating(5)">
+                        <img src="/assets/smileys/1x/5.png"  *ngIf="question[index]['DynamicForm'].set==1">
+                        <img src="/assets/smileys/2x/5.png"  *ngIf="question[index]['DynamicForm'].set==2">
+                        <img src="/assets/smileys/3x/5.png"  *ngIf="question[index]['DynamicForm'].set==3">
+                        <p>Best</p>
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+        </div>
+        <div *ngIf="question[index]['ResponseType']=='tags'">
+            <ion-chip  *ngFor="let radio of question[index].tags;let i=index"  (click)="selectTag(radio)">
+                <ion-label>{{radio.tag}}</ion-label>
+                <ion-icon name="close" *ngIf="radio.selected"></ion-icon>
+            </ion-chip>
+        </div>
+        <div *ngIf="question[index]['ResponseType']=='radio'" >
+
+            <div class="radio-group">
+                <ion-item *ngFor="let radio of question[index].radio">
+                    <ion-label>{{radio.radio}}</ion-label>
+                    <ion-radio slot="start" [checked]="question[index]['DynamicForm']['answer']==radio.radio?true:false" name="{{radio.radio}}" value="{{radio.radio}}" (click)="changeRadio(question[index],radio.radio)"></ion-radio>
+                </ion-item>
+            </div>
+
+        </div>
+        <div  *ngIf="question[index]['ResponseType']=='checkbox'" >
+
+
+            <div class="radio-group">
+                <ion-item  *ngFor="let radio of question[index].checkbox;let i=index">
+                    <ion-label>{{radio.checkbox}}</ion-label>
+                    <ion-checkbox slot="start" [value]="radio.checkbox" [(ngModel)]="question[index]['DynamicForm']['answer'][i]"></ion-checkbox>
+                </ion-item>
+            </div>
+
+        </div>
+        <div class="thumbs" *ngIf="question[index]['ResponseType']=='thumbs'" >
+            <div>
+                <div class="circle">
+                    <fa-icon icon="thumbs-up" (click)="selectThumb('up')" [style.color]="question[index]['DynamicForm']['answer']=='up'?color:'blue'"></fa-icon>
+                </div>
+                <p>Like</p>
+            </div>
+            <div style="margin-left:25px;">
+                <div class="circle">
+                    <fa-icon icon="thumbs-down" (click)="selectThumb('down')" [style.color]="question[index]['DynamicForm']['answer']=='down'?color:'blue'" ></fa-icon>
+                </div>
+                <p>Dislike</p>
+            </div>
+        </div>
+
+        <div class="multi container" *ngIf="question[index]['ResponseType']=='multi'" >
+            <div class="white-box">
+                <ion-item *ngFor="let radio of question[index].multi;let i=index">
+                    <ion-label position="floating">{{radio.text}}</ion-label>
+                    <ion-input type="text" [(ngModel)]="question[index]['DynamicForm']['answer'][i]"></ion-input>
+                </ion-item>
+            </div>
+        </div>
+        <div *ngIf="question[index]['ResponseType']=='text'" >
+              <textarea rows=8 class="opentext" [(ngModel)]="question[index]['DynamicForm']['answer']"></textarea>
+        </div>
+    </div>
+    <div class="footer">
+        <ion-grid>
+            <ion-row>
+                <ion-col class="prev" (click)="prevQuestion()">Prev</ion-col>
+                <ion-col class="next" (click)="nextQuestion()">
+                    <span *ngIf="index<question.length-2">Next</span>
+                    <span *ngIf="index==question.length-1">Submit</span>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+    </div>
+
+
+
+
+</div>

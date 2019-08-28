@@ -1,0 +1,168 @@
+img.smiley{
+  width: 10%;
+  margin-right:10px;
+  margin-top:15px;
+}
+
+.answer-smiley{
+  img{
+    width:15%;
+  }
+}
+
+ion-col{
+  img{
+    width: 70%;
+  }
+}
+
+.header{
+  padding:10px;
+  padding-top:0px;
+  font-size:22px;
+  .header-logo{
+    width: 70px;
+    margin-left:auto;
+    margin-right:auto;
+  }
+  .text-button{
+
+  }
+  .one-col{
+    text-align: left;
+    display: flex;
+    align-items: center;
+    justify-content: left;
+    fa-icon{
+      font-size:25px;
+      font-weight: lighter;
+      margin-right:5px;
+    }
+  }
+  .two-col{
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .three-col{
+    text-align: right;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+  }
+}
+
+.question{
+  display: block;
+  padding-left:15px;
+  padding-right:15px;
+  text-align: center;
+  padding-top:50px;
+  .qtn{
+    font-size:5vw;
+    text-align: center;
+    font-weight: bold;
+  }
+}
+
+.radio-group{
+  margin-left:15%;
+  margin-right:15%;
+  ion-item{
+    margin-bottom:10px;
+  }
+}
+
+.footer{
+  font-size:25px;
+  padding-left:10px;
+  padding-right:10px;
+  width: 100%;
+  bottom:15px;
+  position: fixed;
+  .next{
+    text-align: right;
+  }
+  .prev{
+    text-align: left;
+  }
+}
+
+.circle{
+  width: 100px;
+  height: 100px;
+  display: -webkit-box;
+  display: flex;
+  -webkit-box-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  align-items: center;
+  background: #E4EBF5;
+  font-size: 30px;
+  border-radius:50%;
+  margin-left:auto;
+  margin-right:auto;
+}
+
+.page{
+  background: #fbfbfb !important;
+  height: 100vh;
+}
+
+.thumbs{
+  font-size:70px;
+  display: flex;
+  p{
+    font-size:3vw
+  }
+  margin-left:auto;
+  margin-right:auto;
+  justify-content: center;
+  .circle{
+    width: 150px;
+    height: 150px;
+    display: -webkit-box;
+    display: flex;
+    -webkit-box-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    align-items: center;
+    background: #E4EBF5;
+    font-size: 75px;
+    border-radius: 50%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+#rounded {
+  width: 100%;
+  height: 100px;
+  -moz-border-radius: 50px;
+  -webkit-border-radius: 50px;
+  border-radius: 10px;
+  margin-bottom: 10px;
+}
+
+.container{
+  margin-left:15%;
+  margin-right:15%
+}
+
+
+.multi{
+  .white-box{
+    padding: 25px;
+    background: #fff;
+  }
+  ion-item{
+    border:1px solid;
+    margin-bottom:15px;
+  }
+}
+
+.opentext{
+  width: 70%;
+  border:1px solid
+}

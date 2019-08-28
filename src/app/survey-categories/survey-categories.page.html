@@ -1,0 +1,37 @@
+<div [style.background]="color">
+
+  <ion-icon (click)="data.toggleMenu()" name="menu" style="color:#fff;font-size:20px;margin:10px;margin-right:-25px;float:left"></ion-icon>
+  <ion-title style="margin-left: 40px;color:#fff"> Survey App</ion-title>
+  <br>
+  <div style="width: 100%;text-align: center">
+    <img [src]="logo" style="width: 100px">
+  </div>
+  <br><br>
+  <div class="tabspace">
+    <div class="">
+      <nav class="tabs">
+
+        <a  *ngFor="let list of finalCategories;let i=index" (click)="loadCategory(list._id)" [style.color]="list._id==selectedId?'#fff':''" [style.background]="selectedId==list._id?color:'#fff'">{{list.name}}</a>
+
+      </nav>
+    </div>
+
+  </div>
+</div>
+<div class="page-content">
+  <div *ngIf="selectedId">
+    <ion-card *ngFor="let item of mappedData[selectedId]">
+      <ion-item>
+        {{item.title}}
+        <div class="item-note" slot="end">
+          <button ion-button class="dark-button" (click)="selectItem(item)" [style.color]="color">Start</button>
+        </div>
+      </ion-item>
+
+    </ion-card>
+  </div>
+  <div *ngIf="!selectedId" style="display: flex;height: 100%;align-items: center;justify-content: center;">
+    Sorry no items found
+  </div>
+
+</div>
