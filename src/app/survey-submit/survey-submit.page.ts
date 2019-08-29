@@ -19,8 +19,8 @@ export class SurveySubmitPage implements OnInit {
         Title:'Please give your contact details',
         canSkip:JSON.parse(localStorage.getItem('survey'))['contactConfigure']=='mandatory'?false:true,
         ResponseType:'submit',
-        mobile:'',
-        phone:''
+        email:'',
+        mobile:''
       });
     }
     this.menu.enable(false)
@@ -49,7 +49,7 @@ export class SurveySubmitPage implements OnInit {
 
   async nextQuestion() {
     console.error({question:this.question,index:this.index});
-    if(!this.question[this.index].canSkip && (!(Array.isArray(this.question[this.index]['DynamicForm']['answer'])&&this.question[this.index]['DynamicForm']['answer'].length)) && (this.index==this.question.length-1 || !this.question[this.index]['DynamicForm']['answer'] || !this.question[this.index]['enable'])){
+    if(!this.question[this.index].canSkip && (!(Array.isArray(this.question[this.index]['DynamicForm']['answer'])&&this.question[this.index]['DynamicForm']['answer'].length)) && (!this.question[this.index]['DynamicForm']['answer'] && !this.question[this.index]['enable'])){
       const alert =  await this.alertController.create({
         header: 'Error',
         message: 'Sorry! You cannot skip without answering',
@@ -119,4 +119,26 @@ export class SurveySubmitPage implements OnInit {
     question.enable=true;
     this.question[this.index]['DynamicForm']['answer']=radio;
   }
+
+  async submit(){
+    if(JSON.parse(localStorage.getItem('survey'))['contactShow'] && JSON.parse(localStorage.getItem('survey'))['contactConfigure']=='mandatory') {
+      if(this.question[this.index]['mobile'] && this.question[this.index]['email']){
+      }else{
+        const alert =  await this.alertController.create({
+          header: 'Error',
+          message: 'Sorry! You cannot skip without answering',
+          buttons: ['OK']
+        });
+
+        await alert.present();
+        return;
+      }
+    }
+    this.doSubmit();
+  }
+
+  doSubmit(){
+    console.log({final:this.question})
+  }
+
 }
