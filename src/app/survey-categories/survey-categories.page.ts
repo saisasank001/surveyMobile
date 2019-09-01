@@ -16,7 +16,7 @@ export class SurveyCategoriesPage implements OnInit {
   categories=[];
   finalCategories=[];
   surveys=[];
-  color='#07C'
+  color;
   selectedId='';
     mappedData={};
   constructor(public http: HttpServiceService,
@@ -28,6 +28,7 @@ export class SurveyCategoriesPage implements OnInit {
               ) {
       this.menu.enable(false)
       this.menu.close()
+      this.color=this.data.getThemeColor()
   }
 
 
@@ -118,6 +119,7 @@ export class SurveyCategoriesPage implements OnInit {
     }
 
     canActivate(StartsOn,ExpiresOn){
+      return true;
         StartsOn=StartsOn.replace('Z','');
         StartsOn=StartsOn.split('.')[0].split('T');
         ExpiresOn=ExpiresOn.replace('Z','');

@@ -156,3 +156,40 @@ ion-title{
     background:$secondary-color;
   }
 }
+
+.header{
+  padding:10px;
+  padding-top:0px;
+  font-size:22px;
+  .header-logo{
+    width: 50px;
+    margin-left:auto;
+    margin-right:auto;
+  }
+  .text-button{
+
+  }
+  .one-col{
+    text-align: left;
+    display: flex;
+    align-items: center;
+    justify-content: left;
+    fa-icon{
+      font-size:25px;
+      font-weight: lighter;
+      margin-right:5px;
+    }
+  }
+  .two-col{
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .three-col{
+    text-align: right;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+  }
+}

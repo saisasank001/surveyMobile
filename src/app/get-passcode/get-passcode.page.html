@@ -1,9 +1,21 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>getPasscode</ion-title>
-  </ion-toolbar>
-</ion-header>
+<div class="login container">
+    <div style="text-align: center;line-height: 2.5em;margin-top:10px">
+        <h2 class="bold ">Welcome <span class="primary-text">SurveyApp.</span></h2>
+        <p class="sub-text" color="medium-tint" >Admin gave access? Login to your account</p>
+    </div>
 
-<ion-content>
+    <form class="form" [formGroup]="loginPage" (submit) = "submit(loginPage.value)">
+        <ion-item>
+            <ion-label position="stacked">TenantCode</ion-label>
+            <ion-input placeholder="TenantCode" formControlName="username"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label position="stacked">PassCode</ion-label>
+            <ion-input type="password"formControlName="password" placeholder="Your PassCode"></ion-input>
+        </ion-item>
 
-</ion-content>
+        <p align="center">
+            <button type="submit" class="full-width primary-bg white-text" style="border-radius:40px;width:180px;margin-left:auto">Login</button>
+        </p>
+    </form>
+</div>

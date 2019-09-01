@@ -4,7 +4,7 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'home',
+    redirectTo: 'get-passcode',
     pathMatch: 'full'
   },
   {
@@ -15,10 +15,12 @@ const routes: Routes = [
     path: 'list',
     loadChildren: () => import('./list/list.module').then(m => m.ListPageModule)
   },
-  { path: 'get-tenant-code', loadChildren: './get-tenant-code/get-tenant-code.module#GetTenantCodePageModule' },
   { path: 'get-passcode', loadChildren: './get-passcode/get-passcode.module#GetPasscodePageModule' },
   { path: 'survey-categories', loadChildren: './survey-categories/survey-categories.module#SurveyCategoriesPageModule' },
-  { path: 'survey-submit', loadChildren: './survey-submit/survey-submit.module#SurveySubmitPageModule' }
+  { path: 'survey-submit', loadChildren: './survey-submit/survey-submit.module#SurveySubmitPageModule' },
+  { path: 'alert-categories', loadChildren: './alert-categories/alert-categories.module#AlertCategoriesPageModule' },
+  { path: 'alert-dashboard', loadChildren: './alert-dashboard/alert-dashboard.module#AlertDashboardPageModule' },
+  { path: 'checklist', loadChildren: './checklist/checklist.module#ChecklistPageModule' }
 ];
 
 @NgModule({

@@ -1,0 +1,26 @@
+.login {
+  margin:15px;
+  margin-top: 30px;
+  button {
+    height: 45px;
+    border-radius: 5px;
+    margin-top: 20px;
+    font-size: 15px;
+    background: linear-gradient(to right, #1b84e7 0%, #1515af 100%) !important;
+  }
+  ion-icon {
+    font-size: 30px;
+  }
+  ion-label {
+    font-size: 20px;
+    margin-bottom: 10px;
+  }
+  .sub-text {
+    line-height: 2em;
+    margin-top: 1px;
+    color:grey
+  }
+  .form {
+    margin-top: 100px;
+  }
+}

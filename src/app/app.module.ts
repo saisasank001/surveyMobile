@@ -19,6 +19,7 @@ import { library } from '@fortawesome/fontawesome-svg-core'
 library.add(fas,far,fab)// add all icons
 
 
+
 export const firebaseConfig = {
     apiKey: "AIzaSyCo0L3MdkTrx425kUJGtsAg1mt9nUY_P2s",
     authDomain: "surveyapp-19da9.firebaseapp.com",
@@ -41,7 +42,8 @@ export const firebaseConfig = {
     HttpClientModule,
       AngularFireModule.initializeApp(firebaseConfig),
       AngularFirestoreModule,
-      FontAwesomeModule
+      FontAwesomeModule,
+
   ],
   providers: [
     StatusBar,

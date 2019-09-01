@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import {forEach} from "@angular-devkit/schematics";
 import {AlertController, MenuController} from "@ionic/angular";
 
 @Component({
@@ -139,6 +138,7 @@ export class SurveySubmitPage implements OnInit {
 
   doSubmit(){
     console.log({final:this.question})
+      console.log(JSON.stringify(this.question));
   }
 
 }

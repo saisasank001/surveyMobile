@@ -11,7 +11,7 @@
     <div class="">
       <nav class="tabs">
 
-        <a  *ngFor="let list of finalCategories;let i=index" (click)="loadCategory(list._id)" [style.color]="list._id==selectedId?'#fff':''" [style.background]="selectedId==list._id?color:'#fff'">{{list.name}}</a>
+        <a  *ngFor="let list of finalCategories;let i=index" (click)="loadCategory(list._id)" [style.color]="list._id==selectedId?'#fff':color" [style.background]="selectedId==list._id?color:'#fff'">{{list.name}}</a>
 
       </nav>
     </div>
