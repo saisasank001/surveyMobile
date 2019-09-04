@@ -1,9 +1,39 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>alert-dashboard</ion-title>
-  </ion-toolbar>
-</ion-header>
+<div [style.background]="primaryColor" class="common-header">
+  <fa-icon icon="home" routerLink="/home" class="pull-right"></fa-icon>
+  <fa-icon icon="chevron-left" routerLink="/home"></fa-icon>
+  <ion-title> Alerts</ion-title>
 
-<ion-content>
+</div>
+<div style="width: 100%;text-align: center">
+  <img [src]="logo" class="header-img">
+</div>
+<div class="page">
 
-</ion-content>
+  <ion-grid>
+    <ion-row>
+      <ion-col size="6" *ngFor="let category of allAlerts">
+        <ion-card [style.background]="getColor(category.count)" (click)="selectCategory(category)">
+          <ion-card-content>
+            <ion-grid>
+              <ion-row>
+                <ion-col class="left">
+                  <h4> <fa-icon [icon]="getIcon(category.icon)"></fa-icon></h4>
+                  <h4>{{category.caption}}</h4>
+                </ion-col>
+                <ion-col size="3" class="right">
+                  <div class="circle">
+                    {{category.count}}
+                  </div>
+
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+
+
+</div>

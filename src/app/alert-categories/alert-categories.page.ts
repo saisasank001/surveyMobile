@@ -11,6 +11,7 @@ import {Router} from "@angular/router";
 export class AlertCategoriesPage implements OnInit {
 
   categories;
+  logo;
   color;
   colors=['blue','red','green']
   constructor(private data:DataService,
@@ -18,30 +19,22 @@ export class AlertCategoriesPage implements OnInit {
               public httpService:HttpServiceService) { }
 
   ngOnInit() {
-    this.categories=[{
-      name:'Category'
-    },{
-      name:'Category'
-    },{
-      name:'Category'
-    },{
-      name:'Category'
-    },{
-      name:'Category'
-    }]
+    this.logo=this.data.getLogo()
+    this.categories=[]
     let index=0;
-    this.categories.forEach(item=>{
-      if(index==this.colors.length){
-        index=0;
-      }
-      item.color=this.colors[index++];
-    })
+
     this.color=this.data.getThemeColor();
 
     this.httpService.postApi({'type': 'alert',tenantId:this.data.getTenantId()}, 'categories/getCategoriesCondition').subscribe((res) => {
       console.log(res);
       if(res['success']){
         this.categories = res['data'];
+        this.categories.forEach(item=>{
+          if(index==this.colors.length){
+            index=0;
+          }
+          item.color=this.colors[index++];
+        })
       }
     });
   }

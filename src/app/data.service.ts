@@ -36,6 +36,14 @@ export class DataService {
     return localStorage.getItem('location')===null?false:JSON.parse(localStorage.getItem('tenant'))['_id'];
   }
 
+  getLogo(){
+    return 'https://www.underconsideration.com/brandnew/archives/cyient_logo_detail.png';
+  }
+
+  getTenantName(){
+    return localStorage.getItem('location')===null?false:JSON.parse(localStorage.getItem('tenant'))['tenantName']
+  }
+
   storeTenantCode(value){
     localStorage.setItem('tenantCode',value);
   }

@@ -1,85 +1,94 @@
 <div class="page">
-    <div class="header">
-        <ion-grid>
+    <div class="header" [style.background]="color">
+        <div class="main-header">
+            <ion-grid>
+                <ion-row>
+                    <ion-col><h1>{{tenantName}}</h1></ion-col>
+                    <ion-col class="ion-text-right"><h1>{{time}}</h1></ion-col>
+                </ion-row>
+            </ion-grid>
+        </div>
+
+        <ion-grid class="sub-header">
             <ion-row>
-                <ion-col class="one-col" routerLink="/home"> <fa-icon icon="home"></fa-icon>Home</ion-col>
-                <ion-col class="two-col"><img class="header-logo" src="https://www.expectmorearizona.org/wp-content/uploads/2016/11/facebook-png-icon-follow-us-facebook-1.png"></ion-col>
+                <ion-col>
+                    <h3 style="text-transform: capitalize;">{{name}}</h3>
+                    <p style="margin-top:-5px"><small>Area</small></p>
+
+                </ion-col>
                 <ion-col class="text-button three-col">
-                    &nbsp;
+                    <span class="icon-button" [style.background]="color">
+                        <ion-icon name="exit"></ion-icon>
+                    </span>
                 </ion-col>
             </ion-row>
         </ion-grid>
     </div>
 
-  <ion-card routerLink="/survey-categories" *ngIf="modules.indexOf('feedback')>-1" [style.background]="color">
-    <ion-card-content>
-        <ion-grid>
-            <ion-row>
-                <ion-col class="left">
-<!--                    <div>-->
-<!--                        <img src="assets/user.png">-->
+    <div class="container" style="padding:25px;">
+        <ion-card routerLink="/survey-categories" *ngIf="modules.indexOf('feedback')>-1">
+            <ion-card-content>
+                <ion-grid >
+                    <ion-row>
 
-<!--                    </div>-->
+                        <ion-col class="left">
 
-                    <h4> Feedback</h4>
-                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s</p>
-                </ion-col>
-                <ion-col size="3" class="right">
-                    <div class="circle">
-                        <ion-icon name="md-arrow-forward" [style.color]="color"></ion-icon>
-                    </div>
+                            <h4 [style.color]="color"> <fa-icon class="dashboard-icon" icon="bell"></fa-icon> Feedback</h4>
+                            <p>Lorem Ipsum has been the industry's standard dummy text</p>
+                        </ion-col>
+                        <ion-col size="2" class="right">
+<!--                            <div class="circle">-->
+<!--                                <ion-icon name="md-arrow-forward" [style.color]="color"></ion-icon>-->
+<!--                            </div>-->
+                            <span class="icon-button" [style.background]="color">
+                        <ion-icon name="exit"></ion-icon>
+                    </span>
 
-                </ion-col>
-            </ion-row>
-        </ion-grid>
-    </ion-card-content>
-  </ion-card>
+                        </ion-col>
+                    </ion-row>
+                </ion-grid>
+            </ion-card-content>
+        </ion-card>
 
-  <ion-card  routerLink="/alert-categories" *ngIf="modules.indexOf('alerts')>-1" [style.background]="color">
-    <ion-card-content>
-        <ion-grid>
-            <ion-row>
-                <ion-col class="left">
-<!--                    <div>-->
-<!--                        <img src="assets/user.png">-->
+        <ion-card  routerLink="/alert-categories" *ngIf="modules.indexOf('alerts')>-1" style="margin-top:35px">
+            <ion-card-content>
+                <ion-grid>
+                    <ion-row>
+                        <ion-col class="left">
 
-<!--                    </div>-->
+                            <h4 [style.color]="color"><fa-icon class="dashboard-icon" icon="clipboard-check"></fa-icon> Alerts</h4>
+                            <p>Lorem Ipsum has been the industry's standard dummy text ever since the 1500s</p>
+                        </ion-col>
+                        <ion-col size="2" class="right">
+                            <span class="icon-button" [style.background]="color">
+                        <ion-icon name="exit"></ion-icon>
+                    </span>
 
-                    <h4> Alerts</h4>
-                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s</p>
-                </ion-col>
-                <ion-col size="3" class="right">
-                    <div class="circle">
-                        <ion-icon name="md-arrow-forward" [style.color]="color"></ion-icon>
-                    </div>
+                        </ion-col>
+                    </ion-row>
+                </ion-grid>
+            </ion-card-content>
+        </ion-card>
+        <ion-card  routerLink="/checklist" *ngIf="modules.indexOf('checklist')>-1" style="margin-top:35px">
+            <ion-card-content>
+                <ion-grid>
+                    <ion-row>
+                        <ion-col class="left">
 
-                </ion-col>
-            </ion-row>
-        </ion-grid>
-    </ion-card-content>
-  </ion-card>
-  <ion-card  routerLink="/checklist" *ngIf="modules.indexOf('checklist')>-1" [style.background]="color">
-    <ion-card-content>
-        <ion-grid>
-            <ion-row>
-                <ion-col class="left">
-<!--                    <div>-->
-<!--                        <img src="assets/user.png">-->
+                            <h4 [style.color]="color"><fa-icon class="dashboard-icon"  icon="clipboard-list-check"></fa-icon> Checklist</h4>
+                            <p>Lorem Ipsum has been the industry's standard dummy text ever since the 1500s</p>
+                        </ion-col>
+                        <ion-col size="2" class="right">
+                            <span class="icon-button" [style.background]="color">
+                        <ion-icon name="exit"></ion-icon>
+                    </span>
+                        </ion-col>
+                    </ion-row>
+                </ion-grid>
+            </ion-card-content>
+        </ion-card>
+    </div>
 
-<!--                    </div>-->
 
-                    <h4> Checklist</h4>
-                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s</p>
-                </ion-col>
-                <ion-col size="3" class="right">
-                    <div class="circle">
-                        <ion-icon name="md-arrow-forward" [style.color]="color"></ion-icon>
-                    </div>
-
-                </ion-col>
-            </ion-row>
-        </ion-grid>
-    </ion-card-content>
-  </ion-card>
 
 </div>

@@ -17,7 +17,9 @@ export class SurveyCategoriesPage implements OnInit {
   finalCategories=[];
   surveys=[];
   color;
-  selectedId='';
+    logo: any;
+
+    selectedId='';
     mappedData={};
   constructor(public http: HttpServiceService,
               public menu: MenuController,
@@ -42,6 +44,7 @@ export class SurveyCategoriesPage implements OnInit {
             this.mapData();
         })
     })
+     this.logo=this.data.getLogo();
   }
 
   mapSurvey=(id)=>{
