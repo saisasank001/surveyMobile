@@ -60,6 +60,7 @@ export class GetPasscodePage implements OnInit {
         this.data.storeTenant(res.data.tenant);
         this.data.storeTenantCode(res.data.tenant["tenantCode"]);
         this.data.storeLocation(res.data.location);
+        this.data.storeDevice(res.data.device)
         localStorage.setItem('loggedIn','true');
         this.router.navigateByUrl('/home')
       }else{

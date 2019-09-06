@@ -37,7 +37,7 @@ export class DataService {
   }
 
   getLogo(){
-    return 'https://www.underconsideration.com/brandnew/archives/cyient_logo_detail.png';
+    return this.getTenant()['logo'];
   }
 
   getTenantName(){
@@ -56,11 +56,31 @@ export class DataService {
     localStorage.setItem('location',JSON.stringify(value));
   }
 
+  storeDevice(value){
+    localStorage.setItem('device',JSON.stringify(value));
+  }
+
+  getDevice(){
+    return JSON.parse(localStorage.getItem('device'))
+  }
+
   checkLoggedIn(){
     return localStorage.getItem('loggedIn')===null?false:localStorage.getItem('loggedIn');
   }
 
+  getDeviceId(){
+    return this.getDevice()['_id'];
+  }
+
+  getAreaCode(){
+    return this.getDevice()['area'];
+  }
+
   getThemeColor(){
     return this.getTenant()['theme'];
+  }
+
+  checkPassCode(value){
+    return this.getDevice()['passCode']==value;
   }
 }

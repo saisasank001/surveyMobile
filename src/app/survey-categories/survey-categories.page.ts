@@ -60,8 +60,15 @@ export class SurveyCategoriesPage implements OnInit {
 
             if(survey._id==data.documentName){
                 survey.isActive=data.isActive;
-                survey.expiresOn=new Date(data.expiresOn.seconds*1000).toISOString()
-                survey.startsOn=new Date(data.startsOn.seconds*1000).toISOString();
+                if(data.expiresOn)
+                survey.expiresOn=data.expiresOn
+                if(data.startsOn)
+                survey.startsOn=data.startsOn;
+                if(data.expireTime)
+                survey.expireTime=data.expireTime;
+                if(data.startTime)
+                survey.startTime=data.startTime;
+
                 let json={};
                 this.categories.forEach(category=>{
                     if(!json[category._id]){
@@ -113,7 +120,7 @@ export class SurveyCategoriesPage implements OnInit {
   }
 
   getSurvey=(id)=>{
-     return this.surveys.filter((el)=>{return (el.categoryId==id && el.isActive==true && this.canActivate(el.startsOn,el.expiresOn));});
+     return this.surveys.filter((el)=>{return (el.categoryId==id && el.isActive==true && this.canActivate(el));});
   }
 
     getMonth(date) {
@@ -121,15 +128,16 @@ export class SurveyCategoriesPage implements OnInit {
         return month < 10 ? '0' + month : '' + month; // ('' + month) for string result
     }
 
-    canActivate(StartsOn,ExpiresOn){
-      return true;
+    checkRange(now,start,end){
+      return (now>=start && now<=end);
+    }
+
+    checkDates(StartsOn,ExpiresOn){
         StartsOn=StartsOn.replace('Z','');
         StartsOn=StartsOn.split('.')[0].split('T');
         ExpiresOn=ExpiresOn.replace('Z','');
         ExpiresOn=ExpiresOn.split('.')[0].split('T');
-
-        var today = new Date();
-
+        let today=new Date();
         var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
         var str1 = StartsOn[1],
             str2 = time,
@@ -166,6 +174,30 @@ export class SurveyCategoriesPage implements OnInit {
                 }
             }
         }
+    }
+
+    canActivate(data){
+      let StartsOn;
+      let ExpiresOn;
+      console.log(data)
+        let startsOn=data.startsOn;
+        let expiresOn=data.expiresOn;
+        let startTime=data.startTime;
+        let expireTime=data.expireTime;
+        let today=new Date();
+        if(this.checkRange(today.getFullYear(),startsOn.year,expiresOn.year)){
+                if(this.checkRange(this.getMonth(today),startsOn.month,expiresOn.month)){
+                    if(this.checkRange(today.getDate(),startsOn.day,expiresOn.day)){
+                        if(this.checkRange(today.getHours(),startTime.hour,expireTime.hour)){
+                            if(this.checkRange(today.getMinutes(),startTime.minute,expireTime.minute)){
+                                return true;
+                            }
+                        }
+                    }
+                }
+        }
+      return false;
+
 
     }
 
@@ -201,7 +233,7 @@ export class SurveyCategoriesPage implements OnInit {
     }
 
     selectItem(item: any) {
-        if(this.canActivate(item.startsOn,item.expiresOn)){
+        if(this.canActivate(item)){
             localStorage.setItem('survey',JSON.stringify(item));
             this.router.navigateByUrl('/survey-submit')
         }else{

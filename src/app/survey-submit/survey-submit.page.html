@@ -52,8 +52,10 @@
                 {{question[index]['DynamicForm']['to']}}
             </div>
 
+
+
             <div style="margin-left:15%;margin-right:15%;margin-top:25px">
-                <ng5-slider [(value)]="question[index]['DynamicForm']['answer']"  [options]="getFormattedData(1,question[index]['DynamicForm']['set'])"></ng5-slider>
+                <ng5-slider [(value)]="question[index]['DynamicForm']['answer']"  [options]="getFormattedData(question[index]['DynamicForm']['from'],question[index]['DynamicForm']['to'],question[index]['DynamicForm']['set'])"></ng5-slider>
             </div>
         </div>
 

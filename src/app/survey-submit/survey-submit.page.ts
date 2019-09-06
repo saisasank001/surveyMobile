@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {AlertController, MenuController} from "@ionic/angular";
+import {DataService} from "../data.service";
+import {HttpServiceService} from "../http-service.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-survey-submit',
@@ -11,7 +14,10 @@ export class SurveySubmitPage implements OnInit {
   index=0;
   color='red';
   question=[];
-  constructor(public menu:MenuController,public alertController:AlertController) {
+  constructor(public menu:MenuController,
+              public router:Router,
+              public http:HttpServiceService,
+              public alertController:AlertController,public dataService:DataService) {
     this.question=JSON.parse(localStorage.getItem('survey'))['dynamicForm'];
     if(JSON.parse(localStorage.getItem('survey'))['contactShow']){
       this.question.push({
@@ -23,6 +29,26 @@ export class SurveySubmitPage implements OnInit {
       });
     }
     this.menu.enable(false)
+    if(this.question[this.index]['ResponseType']=='linearScale' && !this.question[this.index]['DynamicForm']['answer']){
+      this.question[this.index]['DynamicForm']['answer']=1;
+      this.question[this.index]['enable']=true;
+    }
+    else if(this.question[this.index]['ResponseType']=='checkbox'){
+      if(!this.question[this.index]['DynamicForm']['answer'] || (this.question[this.index]['DynamicForm']['answer'] && this.question[this.index]['DynamicForm']['answer'].length))
+        this.question[this.index]['checkbox'].forEach(item=>{
+          if(!this.question[this.index]['DynamicForm']['answer']){
+            this.question[this.index]['DynamicForm']['answer']=[]
+          }
+          this.question[this.index]['DynamicForm']['answer'].push();
+        })
+    }else if(this.question[this.index]['ResponseType']=='multi'){
+      this.question[this.index]['multi'].forEach(item=>{
+        if(!this.question[this.index]['DynamicForm']['answer']){
+          this.question[this.index]['DynamicForm']['answer']=[]
+        }
+        this.question[this.index]['DynamicForm']['answer'].push();
+      })
+    }
   }
 
   ngOnInit() {
@@ -88,10 +114,11 @@ export class SurveySubmitPage implements OnInit {
     this.question[this.index]['enable']=true;
   }
 
-  getFormattedData(data,set) {
+  getFormattedData(from,to,set) {
+
     return {
-      floor:1,
-      ceil: data,
+      floor:from,
+      ceil: to,
       showTicks: set == 1 ? true : false
     }
   }
@@ -136,9 +163,37 @@ export class SurveySubmitPage implements OnInit {
     this.doSubmit();
   }
 
+  async presentSuccessAlert(header,message) {
+    const alert = await this.alertController.create({
+      header: header,
+      subHeader: '',
+      message: message,
+      buttons: ['OK']
+    });
+
+    await alert.present();
+    setTimeout(()=>{
+      this.router.navigateByUrl('/home');
+    },5000);
+    alert.dismiss();
+  }
+
   doSubmit(){
-    console.log({final:this.question})
-      console.log(JSON.stringify(this.question));
+    let data=JSON.parse(localStorage.getItem('survey'))
+    let json={
+      categoryId: data.categoryId,
+      surveyId: data._id,
+      finalSubmitDynamicForm: this.question,
+      location: this.dataService.getLocation()['_id'],
+      formTitle: data.title,
+      createdBy:this.dataService.getDeviceId()
+    }
+    this.http.postApi(json,'surveyResponse/createSurveyResp').subscribe(res=>{
+      this.presentSuccessAlert('Success','Successfully submitted your response.')
+
+    },err=>{
+      this.presentSuccessAlert('Error','Something went wrong, please try again.')
+    })
   }
 
 }

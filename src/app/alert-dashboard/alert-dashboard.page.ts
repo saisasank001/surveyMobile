@@ -19,6 +19,7 @@ export class AlertDashboardPage implements OnInit {
   logo;
   primaryColor;
   icons=[];
+  alerts=[];
   allAlerts=[];
   loading;
   colors=['blue','red','green']
@@ -75,10 +76,10 @@ export class AlertDashboardPage implements OnInit {
   }
 
   getAlerts(categoryId){
-    let areaId='5d6a1f5739368233ecc03746';
+    let areaId=this.data.getAreaCode();
     this.httpService.postApi({categoryId:categoryId,areaId:areaId},'alert/getAlertCondition').subscribe((res) => {
 
-      if(res['success']){
+      if(res['success'] && res['data'].length){
         this.allAlerts = res['data'];
         // this.allAlerts=this.allAlerts.filter((item)=>{return item.isActive;})
         this.allAlerts.forEach(item=>{
@@ -101,12 +102,12 @@ export class AlertDashboardPage implements OnInit {
   }
 
   mapAlertReportData(data){
-    this.allAlerts.forEach(alert=> {
+    this.alerts.forEach(alert=> {
       if(alert._id==data.alertId){
         alert.count=data.count;
       }
     })
-    console.log({mapedAlerts:this.allAlerts})
+    console.log({mapedAlerts:this.alerts})
     if(this.loading){
       this.loading.dismiss();
       this.loading=null;
@@ -133,10 +134,8 @@ export class AlertDashboardPage implements OnInit {
           alert.order=data.order;
         }
     })
-    this.allAlerts=this.allAlerts.filter((item)=>{return item.isActive});
-    this.allAlerts.sort(this.compare)
-
-    console.log(this.allAlerts)
+    this.alerts=this.allAlerts.filter((item)=>{return item.isActive});
+    this.alerts.sort(this.compare)
   }
 
   getCharIcon(value){

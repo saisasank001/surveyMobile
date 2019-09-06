@@ -17,7 +17,7 @@
 
                 </ion-col>
                 <ion-col class="text-button three-col">
-                    <span class="icon-button" [style.background]="color">
+                    <span class="icon-button" [style.background]="color" (click)="logout()">
                         <ion-icon name="exit"></ion-icon>
                     </span>
                 </ion-col>
@@ -74,8 +74,7 @@
                 <ion-grid>
                     <ion-row>
                         <ion-col class="left">
-
-                            <h4 [style.color]="color"><fa-icon class="dashboard-icon"  icon="clipboard-list-check"></fa-icon> Checklist</h4>
+                            <h4 [style.color]="color"><fa-icon class="dashboard-icon"  icon="check-square"></fa-icon> Checklist</h4>
                             <p>Lorem Ipsum has been the industry's standard dummy text ever since the 1500s</p>
                         </ion-col>
                         <ion-col size="2" class="right">
