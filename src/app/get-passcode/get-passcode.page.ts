@@ -25,6 +25,9 @@ export class GetPasscodePage implements OnInit {
     this.menu.enable(false);
     if(this.data.checkLoggedIn()){
       this.router.navigateByUrl('/home')
+    }else{
+      localStorage.clear();
+      sessionStorage.clear();
     }
   }
 
