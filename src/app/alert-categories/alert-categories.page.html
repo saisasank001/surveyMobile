@@ -1,34 +1,42 @@
 <div [style.background]="color" class="common-header">
   <fa-icon icon="home" routerLink="/home" class="pull-right"></fa-icon>
   <fa-icon icon="chevron-left" routerLink="/home"></fa-icon>
-  <ion-title> Categories</ion-title>
 </div>
-<div style="width: 100%;text-align: center">
-  <img [src]="logo" class="header-img">
+<div class="logo-header">
+    <img [src]="logo" style="width:200px !important;margin-left:auto;margin-right:auto" class="header-img" *ngIf="logo">
+    <h1 [style.color]="color" *ngIf="!logo">{{tenantName}}</h1>
 </div>
 <div class="page">
 
-  <ion-grid>
+  <div *ngIf="!categories.length" style="display: flex;height: 400px;align-items: center;justify-content: center;flex-direction:column">
+    <img src="assets/Artwork.png">
+    <br>
+    <h2>Seems to be alerts are empty</h2>
+
+  </div>
+
+  <ion-grid *ngIf="categories.length">
     <ion-row>
+
       <ion-col size="6" *ngFor="let category of categories">
-        <ion-card (click)="selectCategory(category)">
+        <ion-card class="list-item-card" (click)="selectCategory(category)" [style.border-color]="color">
           <ion-card-content>
-            <ion-grid>
-              <ion-row>
-
-                <ion-col size="4" class="right">
-                  <div [style.background]="color" class="circle">
-                    <span [style.color]="'#fff'"> {{getCharIcon(category.name)}}</span>
-                  </div>
-
-                </ion-col>
-                <ion-col class="left">
-                  <h4>{{category.name}}</h4>
-                </ion-col>
-              </ion-row>
-            </ion-grid>
+            <div>
+              <span class="icon" [style.color]="color" >
+                {{getCharIcon(category.name)}}
+              </span>
+              <span class="heading white-text">
+             {{category.name}}
+                </span>
+            </div>
+            <div>
+               <span [style.background]="color" class="next-button">
+                                                 <fa-icon icon="angle-right"></fa-icon>
+                                             </span>
+            </div>
           </ion-card-content>
         </ion-card>
+
       </ion-col>
     </ion-row>
   </ion-grid>

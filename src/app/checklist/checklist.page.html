@@ -1,9 +1,39 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>checklist</ion-title>
-  </ion-toolbar>
-</ion-header>
+<div [style.background]="color" class="common-header">
+  <fa-icon icon="home" routerLink="/home" class="pull-right"></fa-icon>
+  <fa-icon icon="chevron-left" routerLink="/home"></fa-icon>
+  <ion-title> Checklist Categories</ion-title>
+</div>
+<div style="width: 100%;text-align: center">
+  <img [src]="logo" style="width:200px !important;margin-left:auto;margin-right:auto" class="header-img" *ngIf="logo">
+  <h1 [style.color]="color" *ngIf="!logo">{{tenantName}}</h1>
+</div>
+<div class="page">
 
-<ion-content>
+  <ion-grid>
+    <ion-row>
+      <ion-col size="6" *ngFor="let category of categories">
+        <ion-card (click)="selectCategory(category)">
+          <ion-card-content>
+            <ion-grid>
+              <ion-row>
 
-</ion-content>
+                <ion-col size="4" class="right">
+                  <div [style.background]="color" class="circle">
+                    <span [style.color]="'#fff'"> {{getCharIcon(category.name)}}</span>
+                  </div>
+
+                </ion-col>
+                <ion-col class="left">
+                  <h4>{{category.name}}</h4>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+
+
+</div>

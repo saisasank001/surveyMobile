@@ -1,19 +1,17 @@
-<div class="page">
-    <div class="header">
-        <ion-grid>
-            <ion-row>
-                <ion-col class="one-col" routerLink="/survey-categories"> <fa-icon icon="angle-left"></fa-icon>Back</ion-col>
-                <ion-col class="two-col"><img class="header-logo" src="https://www.expectmorearizona.org/wp-content/uploads/2016/11/facebook-png-icon-follow-us-facebook-1.png"></ion-col>
-                <ion-col class="text-button three-col"  (click)="nextQuestion()">
-                    skip
-                </ion-col>
-            </ion-row>
-        </ion-grid>
-    </div>
+<div [style.background]="color" class="common-header">
+    <fa-icon icon="chevron-left" routerLink="/survey-categories">Back</fa-icon>
+    <h4 (click)="nextQuestion()" style="color:#fff;margin-top:8px;" class="pull-right">Skip</h4>
+
+</div>
+<div class="logo-header">
+    <img [src]="logo" style="width:200px !important;margin-left:auto;margin-right:auto" class="header-img" *ngIf="logo">
+    <h1 [style.color]="color" *ngIf="!logo">{{tenantName}}</h1>
+</div>
+<div class="page submit-page">
     <div class="question">
         <p class="qtn">{{question[index]['Title']}}</p>
         <div *ngIf="question[index]['ResponseType']=='starRating'">
-            <div class="circle">
+            <div class="circle" [style.background]="color">
                 <span *ngIf="!question[index]['DynamicForm']['answer']">0</span>
                 <span *ngIf="question[index]['DynamicForm']['answer']">{{question[index]['DynamicForm']['answer']}}</span>
                 /
@@ -45,7 +43,7 @@
                     </ion-grid>
         </div>
         <div *ngIf="question[index]['ResponseType']=='linearScale'">
-            <div class="circle">
+            <div class="circle" [style.background]="color">
                 <span *ngIf="!question[index]['DynamicForm']['answer']">0</span>
                 <span *ngIf="question[index]['DynamicForm']['answer']">{{question[index]['DynamicForm']['answer']}}</span>
                 /
@@ -141,13 +139,13 @@
         </div>
         <div class="thumbs" *ngIf="question[index]['ResponseType']=='thumbs'" >
             <div>
-                <div class="circle">
+                <div class="circle" [style.background]="color">
                     <fa-icon icon="thumbs-up" (click)="selectThumb('up')" [style.color]="question[index]['DynamicForm']['answer']=='up'?color:'blue'"></fa-icon>
                 </div>
                 <p>Like</p>
             </div>
             <div style="margin-left:25px;">
-                <div class="circle">
+                <div class="circle" [style.background]="color">
                     <fa-icon icon="thumbs-down" (click)="selectThumb('down')" [style.color]="question[index]['DynamicForm']['answer']=='down'?color:'blue'" ></fa-icon>
                 </div>
                 <p>Dislike</p>
@@ -163,7 +161,7 @@
             </div>
         </div>
         <div *ngIf="question[index]['ResponseType']=='text'" >
-              <textarea rows=8 class="opentext" [(ngModel)]="question[index]['DynamicForm']['answer']"></textarea>
+              <textarea rows=5 class="opentext" [(ngModel)]="question[index]['DynamicForm']['answer']"></textarea>
         </div>
         <div class="multi container" *ngIf="question[index]['ResponseType']=='submit'" >
             <div class="white-box">
@@ -181,10 +179,12 @@
     <div class="footer">
         <ion-grid>
             <ion-row>
-                <ion-col class="prev" (click)="prevQuestion()">Prev</ion-col>
+                <ion-col class="prev" (click)="prevQuestion()">
+                    <ion-button [style.background]="color">Previous</ion-button>
+                </ion-col>
                 <ion-col class="next" >
-                    <span *ngIf="index<question.length-1" (click)="nextQuestion()">Next</span>
-                    <span *ngIf="index==question.length-1" (click)="submit()">Submit</span>
+                    <ion-button [style.background]="color" *ngIf="index<question.length-1" (click)="nextQuestion()">Next</ion-button>
+                    <ion-button [style.background]="color" *ngIf="index==question.length-1" (click)="submit()">Submit</ion-button>
                 </ion-col>
             </ion-row>
         </ion-grid>

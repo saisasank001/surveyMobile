@@ -16,13 +16,17 @@ ion-col{
   }
 }
 
+.submit-page{
+  background:#151724 !important;
+  color:#fff;
+}
+
 
 .question{
   display: block;
   padding-left:15px;
   padding-right:15px;
   text-align: center;
-  padding-top:50px;
   .qtn{
     font-size:5vw;
     text-align: center;
@@ -70,7 +74,7 @@ ion-col{
 }
 
 .page{
-  background: #fbfbfb !important;
+ // background: #fbfbfb !important;
   height: 100vh;
 }
 
@@ -129,4 +133,9 @@ ion-col{
 .opentext{
   width: 70%;
   border:1px solid
+}
+
+textarea{
+  color:#000 !important;
+  font-size:18px;
 }

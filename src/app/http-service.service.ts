@@ -10,8 +10,8 @@ export class HttpServiceService {
 
 
 
-  serverUrl = 'http://localhost:3214/';
-  imageUrl = 'http://localhost:3214/images/';
+  serverUrl = 'http://13.235.182.245:3000/';
+  imageUrl = 'http://13.235.182.245:3000/images/';
   // serverUrl = 'http://13.234.144.50:5000/api/';
   // imageUrl="http://13.234.144.50:5000/images/";
 

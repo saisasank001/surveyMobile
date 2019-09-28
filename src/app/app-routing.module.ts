@@ -20,7 +20,9 @@ const routes: Routes = [
   { path: 'survey-submit', loadChildren: './survey-submit/survey-submit.module#SurveySubmitPageModule' },
   { path: 'alert-categories', loadChildren: './alert-categories/alert-categories.module#AlertCategoriesPageModule' },
   { path: 'alert-dashboard', loadChildren: './alert-dashboard/alert-dashboard.module#AlertDashboardPageModule' },
-  { path: 'checklist', loadChildren: './checklist/checklist.module#ChecklistPageModule' }
+  { path: 'checklist', loadChildren: './checklist/checklist.module#ChecklistPageModule' },
+  { path: 'checklist-passcode', loadChildren: './checklist-passcode/checklist-passcode.module#ChecklistPasscodePageModule' },
+  { path: 'checklist-categories', loadChildren: './checklist-categories/checklist-categories.module#ChecklistCategoriesPageModule' }
 ];
 
 @NgModule({

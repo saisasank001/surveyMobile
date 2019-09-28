@@ -3,7 +3,7 @@ import {DataService} from "../data.service";
 import {Router} from "@angular/router";
 import {HttpServiceService} from "../http-service.service";
 import {FirebaseDbService} from "../firebase-db.service";
-import {LoadingController} from "@ionic/angular";
+import {AlertController, LoadingController} from "@ionic/angular";
 
 @Component({
   selector: 'app-alert-dashboard',
@@ -22,9 +22,11 @@ export class AlertDashboardPage implements OnInit {
   alerts=[];
   allAlerts=[];
   loading;
+  tenantName;
   colors=['blue','red','green']
   constructor(private data:DataService,
               public router:Router,
+              public alertController:AlertController,
               public loadingCtrl: LoadingController,
               public db:FirebaseDbService,
               public httpService:HttpServiceService) {
@@ -63,6 +65,7 @@ export class AlertDashboardPage implements OnInit {
     this.primaryColor=this.data.getThemeColor();
     this.logo=this.data.getLogo()
     this.getAlerts(JSON.parse(localStorage.getItem('category'))['_id']);
+    this.tenantName=this.data.getTenantName();
     this.loading = await this.loadingCtrl.create({
       message: 'Loading'
     });
@@ -142,6 +145,21 @@ export class AlertDashboardPage implements OnInit {
     return value.slice(0,1).toUpperCase()
   }
 
+  async presentSuccessAlert(header,message) {
+    const alert = await this.alertController.create({
+      header: header,
+      subHeader: '',
+      message: message,
+      buttons: ['OK']
+    });
+
+    await alert.present();
+    setTimeout(()=>{
+      this.router.navigateByUrl('/home');
+    },5000);
+    alert.dismiss();
+  }
+
   async selectCategory(category: any) {
     this.loading = await this.loadingCtrl.create({
       message: 'Loading'
@@ -156,7 +174,7 @@ export class AlertDashboardPage implements OnInit {
       console.log(res);
       this.loading.dismiss();
       if(res['success']){
-        console.log('success')
+        this.presentSuccessAlert('Success','Thanks for reporting issue, we will soon solve this')
       }
     });
   }

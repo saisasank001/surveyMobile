@@ -1,11 +1,12 @@
 <div [style.background]="color" class="common-header">
   <fa-icon icon="home" routerLink="/home" class="pull-right"></fa-icon>
   <fa-icon icon="chevron-left" routerLink="/home"></fa-icon>
-  <ion-title> Surveys</ion-title>
+
 
 </div>
-<div style="width: 100%;text-align: center">
-  <img [src]="logo" class="header-img">
+<div class="logo-header">
+    <img [src]="logo" style="width:200px !important;margin-left:auto;margin-right:auto" class="header-img" *ngIf="logo">
+    <h1 [style.color]="color" *ngIf="!logo">{{tenantName}}</h1>
 </div>
 <div class="tabspace">
   <div class="">
@@ -18,19 +19,31 @@
 
 </div>
 <div class="page-content">
+  <br>
   <div *ngIf="selectedId">
-    <ion-card *ngFor="let item of mappedData[selectedId]">
-      <ion-item>
-        {{item.title}}
-        <div class="item-note" slot="end">
-          <button ion-button class="dark-button" [style.border-color]="color" [style.color]="color" (click)="selectItem(item)" [style.color]="color">Start</button>
+    <ion-card class="list-item-card" (click)="selectItem(item)" *ngFor="let item of mappedData[selectedId]" [style.border-color]="color">
+      <ion-card-content>
+        <div>
+              <span class="icon" [style.color]="color" >
+                {{getCharIcon(item.title)}}
+              </span>
+          <span class="heading white-text">
+             {{item.title}}
+                </span>
         </div>
-      </ion-item>
-
+        <div>
+               <span [style.background]="color" class="next-button">
+                                                 <fa-icon icon="angle-right"></fa-icon>
+                                             </span>
+        </div>
+      </ion-card-content>
     </ion-card>
   </div>
-  <div *ngIf="!selectedId" style="display: flex;height: 100%;align-items: center;justify-content: center;">
-    Sorry no items found
+  <div *ngIf="!selectedId || (selectedId && mappedData[selectedId].length<1)" style="display: flex;height: 400px;align-items: center;justify-content: center;flex-direction:column">
+    <img src="assets/Artwork.png">
+    <br>
+    <h2 style="color:#fff">No surveys were added</h2>
+
   </div>
 
 </div>

@@ -1,5 +1,7 @@
 {
   "name": "surveyMobile",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }

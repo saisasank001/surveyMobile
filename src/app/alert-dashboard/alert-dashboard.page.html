@@ -1,30 +1,37 @@
 <div [style.background]="primaryColor" class="common-header">
   <fa-icon icon="home" routerLink="/home" class="pull-right"></fa-icon>
-  <fa-icon icon="chevron-left" routerLink="/home"></fa-icon>
+  <fa-icon icon="chevron-left" routerLink="/alert-categories"></fa-icon>
   <ion-title> Alerts</ion-title>
 
 </div>
-<div style="width: 100%;text-align: center">
-  <img [src]="logo" class="header-img">
+<div class="logo-header">
+    <img [src]="logo" style="width:200px !important;margin-left:auto;margin-right:auto" class="header-img" *ngIf="logo">
+    <h1 [style.color]="color" *ngIf="!logo">{{tenantName}}</h1>
 </div>
 <div class="page">
+  <div *ngIf="!allAlerts.length" style="display: flex;height: 400px;align-items: center;justify-content: center;flex-direction:column">
+    <img src="assets/Artwork.png">
+    <br>
+    <h2>Seems to be alerts are empty</h2>
 
-  <ion-grid>
+  </div>
+  <ion-grid *ngIf="allAlerts.length">
     <ion-row>
       <ion-col size="6" *ngFor="let category of allAlerts">
+<!--        <div class="alert-icon">-->
+<!--          <fa-icon [icon]="'home'"></fa-icon>-->
+<!--        </div>-->
         <ion-card [style.background]="getColor(category.count)" (click)="selectCategory(category)">
+
           <ion-card-content>
             <ion-grid>
               <ion-row>
                 <ion-col class="left">
-                  <h4> <fa-icon [icon]="getIcon(category.icon)"></fa-icon></h4>
                   <h4>{{category.caption}}</h4>
+                  <p>Reportees : {{category.count}} People</p>
                 </ion-col>
                 <ion-col size="3" class="right">
-                  <div class="circle">
-                    {{category.count}}
-                  </div>
-
+                  <fa-icon [icon]="'home'" style="font-size:50px;"></fa-icon>
                 </ion-col>
               </ion-row>
             </ion-grid>
@@ -33,6 +40,36 @@
       </ion-col>
     </ion-row>
   </ion-grid>
+
+<!--  <ion-grid>-->
+<!--    <ion-row>-->
+<!--      <ion-col size="6" *ngFor="let category of allAlerts">-->
+<!--        <ion-card [style.background]="getColor(category.count)" (click)="selectCategory(category)">-->
+<!--          <ion-card-header>-->
+<!--            <div>-->
+<!--              <fa-icon [icon]="getIcon(category.icon)"></fa-icon>-->
+<!--            </div>-->
+<!--          </ion-card-header>-->
+<!--          <ion-card-content>-->
+<!--            <ion-grid>-->
+<!--              <ion-row>-->
+<!--                <ion-col class="left">-->
+<!--                  <h4> </h4>-->
+<!--                  <h4>{{category.caption}}</h4>-->
+<!--                </ion-col>-->
+<!--                <ion-col size="3" class="right">-->
+<!--                  <div class="circle">-->
+<!--                    {{category.count}}-->
+<!--                  </div>-->
+
+<!--                </ion-col>-->
+<!--              </ion-row>-->
+<!--            </ion-grid>-->
+<!--          </ion-card-content>-->
+<!--        </ion-card>-->
+<!--      </ion-col>-->
+<!--    </ion-row>-->
+<!--  </ion-grid>-->
 
 
 

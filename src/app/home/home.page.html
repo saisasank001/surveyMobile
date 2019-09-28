@@ -1,93 +1,101 @@
-<div class="page">
+<div class="homepage">
     <div class="header" [style.background]="color">
         <div class="main-header">
             <ion-grid>
                 <ion-row>
-                    <ion-col><h1>{{tenantName}}</h1></ion-col>
-                    <ion-col class="ion-text-right"><h1>{{time}}</h1></ion-col>
+                    <ion-col style="line-height: 10px"><h3 style="text-transform: capitalize;">{{name}}</h3>
+                        <p style="margin-top:-5px">
+                            <small>Area</small>
+                        </p>
+                    </ion-col>
+                    <ion-col class="header-right-text"><h1 (click)="logout()">{{time}}</h1></ion-col>
                 </ion-row>
             </ion-grid>
         </div>
-
-        <ion-grid class="sub-header">
-            <ion-row>
-                <ion-col>
-                    <h3 style="text-transform: capitalize;">{{name}}</h3>
-                    <p style="margin-top:-5px"><small>Area</small></p>
-
-                </ion-col>
-                <ion-col class="text-button three-col">
-                    <span class="icon-button" [style.background]="color" (click)="logout()">
-                        <ion-icon name="exit"></ion-icon>
-                    </span>
-                </ion-col>
-            </ion-row>
-        </ion-grid>
     </div>
+    <ion-card class="logo-card">
+        <ion-card-content>
+            <div class="logo-header">
+                <img [src]="logo" style="width:200px !important;margin-left:auto;margin-right:auto" class="header-img" *ngIf="logo">
+                <h1 [style.color]="color" *ngIf="!logo">{{tenantName}}</h1>
+            </div>
+        </ion-card-content>
+    </ion-card>
+
 
     <div class="container" style="padding:25px;">
-        <ion-card routerLink="/survey-categories" *ngIf="modules.indexOf('feedback')>-1">
-            <ion-card-content>
-                <ion-grid >
-                    <ion-row>
-
-                        <ion-col class="left">
-
-                            <h4 [style.color]="color"> <fa-icon class="dashboard-icon" icon="bell"></fa-icon> Feedback</h4>
-                            <p>Lorem Ipsum has been the industry's standard dummy text</p>
-                        </ion-col>
-                        <ion-col size="2" class="right">
-<!--                            <div class="circle">-->
-<!--                                <ion-icon name="md-arrow-forward" [style.color]="color"></ion-icon>-->
-<!--                            </div>-->
-                            <span class="icon-button" [style.background]="color">
-                        <ion-icon name="exit"></ion-icon>
-                    </span>
-
-                        </ion-col>
-                    </ion-row>
-                </ion-grid>
-            </ion-card-content>
-        </ion-card>
-
-        <ion-card  routerLink="/alert-categories" *ngIf="modules.indexOf('alerts')>-1" style="margin-top:35px">
+        <ion-card routerLink="/survey-categories" *ngIf="modules.indexOf('feedback')>-1" style="margin-top:-5px">
             <ion-card-content>
                 <ion-grid>
                     <ion-row>
-                        <ion-col class="left">
-
-                            <h4 [style.color]="color"><fa-icon class="dashboard-icon" icon="clipboard-check"></fa-icon> Alerts</h4>
-                            <p>Lorem Ipsum has been the industry's standard dummy text ever since the 1500s</p>
+                        <ion-col class="text-center" size="2">
+                            <div [style.color]="color">
+                                <fa-icon icon="thumbs-up" class="dashboard-icon"></fa-icon>
+                            </div>
+                        </ion-col>
+                        <ion-col>
+                            <span class="main-text white-text">Feedback</span>
+                            <p class="white-text">Provide your valuable feedback of services</p>
                         </ion-col>
                         <ion-col size="2" class="right">
-                            <span class="icon-button" [style.background]="color">
-                        <ion-icon name="exit"></ion-icon>
-                    </span>
-
+                            <span [style.background]="color" class="next-button">
+                                <fa-icon icon="angle-right"></fa-icon>
+                            </span>
                         </ion-col>
                     </ion-row>
                 </ion-grid>
             </ion-card-content>
         </ion-card>
-        <ion-card  routerLink="/checklist" *ngIf="modules.indexOf('checklist')>-1" style="margin-top:35px">
+
+        <ion-card routerLink="/alert-categories" *ngIf="modules.indexOf('alerts')>-1" style="margin-top:25px">
             <ion-card-content>
                 <ion-grid>
                     <ion-row>
-                        <ion-col class="left">
-                            <h4 [style.color]="color"><fa-icon class="dashboard-icon"  icon="check-square"></fa-icon> Checklist</h4>
-                            <p>Lorem Ipsum has been the industry's standard dummy text ever since the 1500s</p>
+                        <ion-col class="text-center" size="2">
+                            <div [style.color]="color">
+                                <fa-icon icon="bell" class="dashboard-icon"></fa-icon>
+                            </div>
+                        </ion-col>
+                        <ion-col>
+                            <span class="main-text white-text">Notify</span>
+                            <p class="white-text">Inform a problem to responsible person via SMS/Email</p>
                         </ion-col>
                         <ion-col size="2" class="right">
-                            <span class="icon-button" [style.background]="color">
-                        <ion-icon name="exit"></ion-icon>
-                    </span>
+                            <span [style.background]="color" class="next-button">
+                                <fa-icon icon="angle-right"></fa-icon>
+                            </span>
+                        </ion-col>
+                    </ion-row>
+
+                </ion-grid>
+            </ion-card-content>
+        </ion-card>
+        <ion-card routerLink="/checklist" *ngIf="modules.indexOf('checklist')>-1" style="margin-top:25px">
+            <ion-card-content>
+                <ion-grid>
+                    <ion-row>
+                        <ion-col class="text-center" size="2">
+                            <div [style.color]="color">
+                                <fa-icon icon="check-square" class="dashboard-icon"></fa-icon>
+                            </div>
+                        </ion-col>
+                        <ion-col>
+                            <span class="main-text white-text">Checklist</span>
+                            <p class="white-text">Report your done completed task</p>
+                        </ion-col>
+                        <ion-col size="2" class="right">
+                            <span [style.background]="color" class="next-button">
+                                <fa-icon icon="angle-right"></fa-icon>
+                            </span>
                         </ion-col>
                     </ion-row>
                 </ion-grid>
             </ion-card-content>
         </ion-card>
+        <br>
+        <br>
+        <br>
     </div>
-
 
 
 </div>

@@ -1,0 +1,64 @@
+.passcode{
+  height: 100vh;
+  ion-input{
+    width: 50px;
+    background: #fff;
+    color:blue;
+  }
+  form{
+    color:#fff !important;
+    margin-top: 34px;
+    margin-bottom: 32px;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 15px;
+    margin-bottom: 32px;
+    display: -webkit-box;
+    display: flex;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+    /* padding: 0px 50% 0px 10px; */
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+    div{
+      margin-top: 23px;
+      margin-right: 5px;
+      h2{
+        margin: 0;
+        font-size: 12px;
+        color: #b6b6be;
+      }
+      ion-input{
+        text-align: center;
+        border: 1px solid #e1e5e8;
+        border-radius: 5px;
+        margin-top: 8px;
+        font-size: 14px;
+        padding: 3px !important;
+        padding-left: 0px !important;
+        color: #383838;
+        font-weight: 600;
+        --padding-start: 0;
+      }
+      &:last-child{
+        margin-top: 23px;
+        margin-right: 0px;
+      }
+    }
+  }
+
+  .numpad{
+    position:absolute;
+    bottom:40px;
+    width: 100%;
+    ion-col{
+      font-size:28px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 60px;
+      color:#fff;
+    }
+  }
+}

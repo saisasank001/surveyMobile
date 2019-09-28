@@ -12,8 +12,10 @@ import {Router} from "@angular/router";
 export class SurveySubmitPage implements OnInit {
 
   index=0;
-  color='red';
+  color;
   question=[];
+  logo;
+  tenantName;
   constructor(public menu:MenuController,
               public router:Router,
               public http:HttpServiceService,
@@ -52,6 +54,9 @@ export class SurveySubmitPage implements OnInit {
   }
 
   ngOnInit() {
+      this.tenantName=this.dataService.getTenantName()
+    this.color=this.dataService.getThemeColor();
+    this.logo=this.dataService.getLogo();
   }
 
   prevQuestion() {
@@ -151,7 +156,7 @@ export class SurveySubmitPage implements OnInit {
       if(this.question[this.index]['mobile'] && this.question[this.index]['email']){
       }else{
         const alert =  await this.alertController.create({
-          header: 'Error',
+          header: 'Alert',
           message: 'Sorry! You cannot skip without answering',
           buttons: ['OK']
         });

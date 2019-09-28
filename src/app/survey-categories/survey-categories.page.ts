@@ -16,6 +16,7 @@ export class SurveyCategoriesPage implements OnInit {
   categories=[];
   finalCategories=[];
   surveys=[];
+    tenantName: any;
   color;
     logo: any;
 
@@ -45,6 +46,7 @@ export class SurveyCategoriesPage implements OnInit {
         })
     })
      this.logo=this.data.getLogo();
+    this.tenantName=this.data.getTenantName();
   }
 
   mapSurvey=(id)=>{
@@ -113,6 +115,7 @@ export class SurveyCategoriesPage implements OnInit {
             json[category._id]=this.getSurvey(category._id)
       })
       this.mappedData=json;
+      console.log({mapped:this.mappedData})
       if(this.categories.length){
           this.selectedId=this.categories[0]._id;
       }
@@ -177,6 +180,7 @@ export class SurveyCategoriesPage implements OnInit {
     }
 
     canActivate(data){
+
       let StartsOn;
       let ExpiresOn;
       console.log(data)
@@ -186,7 +190,8 @@ export class SurveyCategoriesPage implements OnInit {
         let expireTime=data.expireTime;
         let today=new Date();
         if(this.checkRange(today.getFullYear(),startsOn.year,expiresOn.year)){
-                if(this.checkRange(this.getMonth(today),startsOn.month,expiresOn.month)){
+            if(this.checkRange(this.getMonth(today),startsOn.month,expiresOn.month)){
+                if(today.getDate()==startsOn.day && today.getDate()==expiresOn.day){
                     if(this.checkRange(today.getDate(),startsOn.day,expiresOn.day)){
                         if(this.checkRange(today.getHours(),startTime.hour,expireTime.hour)){
                             if(this.checkRange(today.getMinutes(),startTime.minute,expireTime.minute)){
@@ -194,6 +199,16 @@ export class SurveyCategoriesPage implements OnInit {
                             }
                         }
                     }
+                }else{
+                    if(this.checkRange(today.getDate(),startsOn.day,expiresOn.day)){
+                        if(this.checkRange(today.getHours(),startTime.hour,today.getHours()+1)){
+                            if(this.checkRange(today.getMinutes(),startTime.minute,today.getMinutes()+2)){
+                                return true;
+                            }
+                        }
+                    }
+                }
+
                 }
         }
       return false;
@@ -203,7 +218,7 @@ export class SurveyCategoriesPage implements OnInit {
 
   getCategories = () => {
     return new Promise(resolve => {
-        this.http.postApi({}, 'categories/getCategoriesCondition').subscribe(res=>{
+        this.http.postApi({tenantId:this.data.getTenantId(),'type':'feedback'}, 'categories/getCategoriesCondition').subscribe(res=>{
             if(res.success)
             this.categories=res.data;
             resolve(1)
@@ -222,6 +237,7 @@ export class SurveyCategoriesPage implements OnInit {
       });
 
   }
+
 
     loadCategory(_id: any) {
         this.selectedId=_id;
@@ -254,4 +270,7 @@ export class SurveyCategoriesPage implements OnInit {
         await alert.present();
     }
 
+    getCharIcon(value){
+        return value.slice(0,1).toUpperCase()
+    }
 }

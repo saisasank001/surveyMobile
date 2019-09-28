@@ -5,13 +5,13 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { IonicModule } from '@ionic/angular';
 
-import { ChecklistPage } from './checklist.page';
+import { ChecklistPasscodePage } from './checklist-passcode.page';
 import {FontAwesomeModule} from "@fortawesome/angular-fontawesome";
 
 const routes: Routes = [
   {
     path: '',
-    component: ChecklistPage
+    component: ChecklistPasscodePage
   }
 ];
 
@@ -23,6 +23,6 @@ const routes: Routes = [
         RouterModule.forChild(routes),
         FontAwesomeModule
     ],
-  declarations: [ChecklistPage]
+  declarations: [ChecklistPasscodePage]
 })
-export class ChecklistPageModule {}
+export class ChecklistPasscodePageModule {}
