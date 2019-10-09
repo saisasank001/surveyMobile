@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
 import {MenuController} from "@ionic/angular";
+import {HttpServiceService} from "./http-service.service";
 
 @Injectable({
   providedIn: 'root'
 })
 export class DataService {
 
-  constructor(public menu: MenuController) {
+  constructor(public menu: MenuController,public http:HttpServiceService) {
 
   }
   toggleMenu=()=>{
@@ -37,7 +38,13 @@ export class DataService {
   }
 
   getLogo(){
-    return this.getTenant()['logo'];
+    let logo=this.getTenant()['logo'];
+    if(logo){
+      return this.http.imageUrl+this.getTenant()['logo'];
+    }else{
+      return false;
+    }
+
   }
 
   getTenantName(){
